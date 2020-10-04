@@ -1,6 +1,8 @@
 const pokemonsNumber = 494;
 //494
 const flexContainer = document.querySelector('.flex-container');
+const buttonsContainer = document.querySelector('.page-buttons-container');
+
 const typeMap = 
 {
     bug: 'Images/bug.jpg',
@@ -27,11 +29,12 @@ const getPokemon = async (id) => {
     const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
     const result = await fetch(url);
     const pokemon = await result.json();
+    if(pokemon.id > pokemonsNumber) return;
     createPokemonCard(pokemon);
 }
 
-const fetchPokemons = async () => {
-    for(let i=1; i <= pokemonsNumber; i++){
+const fetchPokemons = async (num) => {
+    for(let i=num; i < num + 12; i++){
         await getPokemon(i);
     }
 }
@@ -94,4 +97,15 @@ function createPokemonCard(pokemon){
 
     flexContainer.appendChild(pokemonEl);
 }
-fetchPokemons();
+for(let i = 1; i <= Math.ceil(pokemonsNumber/12); i++){
+    let button = document.createElement('button');
+    button.textContent = i;
+    button.addEventListener('click', function(){
+        while(flexContainer.firstChild){
+        flexContainer.removeChild(flexContainer.childNodes[0]);}
+        fetchPokemons(((i-1)*12)+1);
+    })
+    buttonsContainer.appendChild(button);
+}
+
+fetchPokemons(1);
