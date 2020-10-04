@@ -43,6 +43,7 @@ body{
     max-width: 1080px;
 }
 
+
 .flex-item{
     display: flex;
     height: 350px;
@@ -55,9 +56,14 @@ body{
     justify-content: center;
     align-content: center;
     text-align: center;
-    background-position: center;
+    background-position: 0 0, 0 0;
     background-size: cover;
     font-size: 1.2rem;
+    transition: .5s;
+}
+
+.flex-item:hover{
+    background-position: center;
 }
 
 img{
@@ -69,4 +75,30 @@ img{
 .card-title{
     font-size: 2rem;
     font-weight: 600;
+}
+
+.page-buttons-container{
+    margin-top: 10px;
+    max-width: 700px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+button {
+    background-color: rgba(0,0,0,0);
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+button:hover{
+    outline:inset;
+}
+
+button:focus{
+    outline: inset;
+    margin: 0;
 }
